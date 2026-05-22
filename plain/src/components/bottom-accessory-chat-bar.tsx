@@ -53,7 +53,9 @@ export function BottomAccessoryChatBar({ value, onOpenChat }: BottomAccessoryCha
         onPress={onOpenChat}
         style={styles.inlineBar}
         accessibilityLabel="Open chat">
-        <ThemedText type="smallBold">💬</ThemedText>
+        <ThemedView type="backgroundElement" style={styles.inlineButton}>
+          <ThemedText type="smallBold">💬</ThemedText>
+        </ThemedView>
       </Pressable>
     );
   }
@@ -149,7 +151,13 @@ export function ChatInputModal({
 
 const styles = StyleSheet.create({
   inlineBar: {
-    padding: Spacing.two,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inlineButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
   },

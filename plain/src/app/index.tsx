@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -30,56 +30,61 @@ function getDevMenuHint() {
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
+    <View collapsable={false} style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <SafeAreaView style={styles.safeArea}>
+          <ThemedView style={styles.heroSection}>
+            <AnimatedIcon />
+            <ThemedText type="title" style={styles.title}>
+              Welcome to&nbsp;Expo
+            </ThemedText>
+          </ThemedView>
+
+          <ThemedText type="code" style={styles.code}>
+            get started
           </ThemedText>
-        </ThemedView>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+          <ThemedView type="backgroundElement" style={styles.stepContainer}>
+            <HintRow
+              title="Try editing"
+              hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
+            />
+            <HintRow title="Dev tools" hint={getDevMenuHint()} />
+            <HintRow
+              title="Fresh start"
+              hint={<ThemedText type="code">npm run reset-project</ThemedText>}
+            />
+          </ThemedView>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+          {Platform.OS === 'web' && <WebBadge />}
+        </SafeAreaView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    paddingBottom: BottomTabInset + Spacing.six,
   },
   safeArea: {
-    flex: 1,
+    width: '100%',
     paddingHorizontal: Spacing.four,
     alignItems: 'center',
     gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
   },
   heroSection: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
+    minHeight: 320,
     paddingHorizontal: Spacing.four,
+    paddingVertical: Spacing.six,
     gap: Spacing.four,
   },
   title: {

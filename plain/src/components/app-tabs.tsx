@@ -47,6 +47,7 @@ export default function AppTabs() {
         backgroundColor={colors.background}
         indicatorColor={colors.backgroundElement}
         labelStyle={{ color: labelColor, selected: { color: colors.text } }}
+        minimizeBehavior="onScrollDown"
         tintColor={tintColor}>
         <NativeTabs.BottomAccessory>
           <BottomAccessoryChatBar value={message} onOpenChat={() => setIsChatOpen(true)} />
